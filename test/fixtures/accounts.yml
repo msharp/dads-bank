@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  password: MyString
-  salt: MyString
+  name: kid-1
+  hashed_password: 6057d5bc5bae7a0ecee4c12d45e3fc906f4f036e 
+  salt: fd4f9c726f45758925963d73ebb419d8bfa3685e 
+  bank_id: 1
 
 two:
-  name: MyString
-  password: MyString
-  salt: MyString
+  name: kid-2
+  hashed_password: 416175cd6a60a7532256de5a52182358ad44d17c
+  salt: 64578486c36dcbf4c15528b93fd0cab5c6ad1b43
+  bank_id: 1
