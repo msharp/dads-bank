@@ -14,7 +14,7 @@
   <tr>
     <td><%= account.bank.name %></td>
     <td><%= account.name %></td>
-    <td><%= account.balance %></td>
+    <td><%= number_to_currency(account.balance) %></td>
     <td><%= link_to 'Show', bank_account_path(@bank,account) %></td>
     <td><%= link_to 'Edit', edit_bank_account_path(@bank,account) %></td>
     <td><%= link_to 'Destroy', [@bank, account], confirm: 'Are you sure?', method: :delete %></td>
