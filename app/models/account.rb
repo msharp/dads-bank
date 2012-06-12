@@ -1,6 +1,6 @@
 require 'digest'
 class Account < ActiveRecord::Base
-  attr_accessible :name, :hashed_password, :salt, :bank_id
+  attr_accessible :name, :hashed_password, :salt, :bank_id, :allowance
 
   belongs_to :bank
   has_many :transactions
@@ -17,23 +17,29 @@ class Account < ActiveRecord::Base
     credit(credit_amount,"Daily interest calculated at #{rate.to_s}")
   end
 
+  def apply_allowance
+    a = self.allowance
+    credit(a, "Allowance of #{a} applied")
+  end
+
   def credit(amount, description = nil)
-    t = Transaction.new
-    t.account = self
-    t.amount = amount
-    t.balance = balance + amount
-    t.description = description
-    t.save
+    transact(amount,description){ balance + amount }
   end
 
   def debit(amount, description = nil)
-    t = Transaction.new
-    t.account = self
-    t.amount = amount * -1
-    t.balance = balance - amount
-    t.description = description
-    t.save
+    transact(amount,description){ balance - amount }
   end
 
+  private
+
+  def transact(amount, description, &block)
+    new_balance = yield
+    Transaction.create(
+      :account_id => self.id,
+      :amount => amount,
+      :balance => new_balance,
+      :description => description
+    )
+  end
 
 end

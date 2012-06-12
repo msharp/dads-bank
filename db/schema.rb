@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120607230227) do
+ActiveRecord::Schema.define(:version => 20120612061450) do
 
   create_table "accounts", :force => true do |t|
-    t.string   "name",            :null => false
-    t.string   "hashed_password", :null => false
-    t.string   "salt",            :null => false
+    t.string   "name",                             :null => false
+    t.string   "hashed_password",                  :null => false
+    t.string   "salt",                             :null => false
     t.integer  "bank_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.decimal  "allowance",       :default => 0.0, :null => false
   end
 
   create_table "banks", :force => true do |t|
