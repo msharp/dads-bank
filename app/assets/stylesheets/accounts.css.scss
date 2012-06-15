@@ -1,3 +1,61 @@
 // Place all the styles related to the Accounts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.dataTables_length label {
+    width: 460px;
+    float: left;
+    text-align: left;
+}
+ 
+div.dataTables_length select {
+    width: 75px;
+}
+ 
+div.dataTables_filter label {
+    float: right;
+    text-align: right;
+    width: 460px;
+}
+ 
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
+}
+ 
+table {
+    margin-bottom: 6px !important;
+    clear: both;
+}
+
+/* changes for datatables and bootstrap 2 */
+table.table thead .sorting,
+table.table thead .headerSortUp,
+table.table thead .headerSortDown,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+    cursor: pointer;
+    *cursor: hand;
+}
+ 
+table.table thead .sorting { background: url('/assets/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('/assets/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('/assets/sort_desc.png') no-repeat center right; }
+ 
+table.table thead .headerSortDown { background: url('/assets/sort_asc.png') no-repeat center right; }
+table.table thead .headerSortUp { background: url('/assets/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: url('/assets/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('/assets/sort_desc_disabled.png') no-repeat center right; }
+
+#chart_div {
+  width: 100%; 
+  height: 300px;
+  margin: 1em 0;
+}
