@@ -18,4 +18,8 @@ class Bank < ActiveRecord::Base
     end
   end
 
+  def interest_readable
+    "#{interest_rate}% #{interest_period.capitalize}"
+  end
+
 end

@@ -5,9 +5,13 @@
   <%= @account.name %>
 </p>
 
-<p><b>Balance:</b> <%= number_to_currency(@account.balance) %></p>
+<div id="chart_div" style="width: 900px; height: 300px;"></div>
 
-<table>
+<p><b>Balance:</b> <%= number_to_currency(@account.balance) %></p>
+<p><b>Allowance:</b> <%= number_to_currency(@account.allowance) %></p>
+<p><b>Interest rate:</b> <%= @account.bank.interest_readable %>
+
+<table class="table table-striped">
   <caption>Transactions</caption>
   <tr>
     <th>When</th>
@@ -31,20 +35,20 @@
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+  /* https://developers.google.com/chart/interactive/docs/gallery/linechart */
   google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable(<%= [["time","balance"]].concat(@account.transactions.map{|t| [t.created_at, t.balance.to_f]}).to_json.html_safe %>);
-        
+        var data = google.visualization.arrayToDataTable(<%= @chart_data.to_json.html_safe %>);
         var options = {
-          title: 'Account Balance',
-          lineWidth: 4
+          lineWidth: 6,
+          colors: ['green','blue'],
+          legend: {position: 'none'},
+          hAxis: {textPosition: 'none'},
+          vAxis: {format: '$#', textPosition: 'in'},
+          chartArea:{left:0,top:0,width:"100%",height:"100%"}
         };
-
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
         chart.draw(data, options);
       }
-
-
 </script>
-<div id="chart_div" style="width: 900px; height: 500px;"></div>

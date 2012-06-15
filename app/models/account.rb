@@ -14,7 +14,7 @@ class Account < ActiveRecord::Base
   def apply_interest
     rate = self.bank.daily_interest_rate
     credit_amount = balance * (rate / 100) 
-    credit(credit_amount,"Daily interest calculated at #{rate.to_s}")
+    credit(credit_amount,"Daily interest calculated at #{rate.to_f.round(4)}")
   end
 
   def apply_allowance

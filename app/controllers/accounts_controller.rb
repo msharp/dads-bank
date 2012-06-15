@@ -20,6 +20,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.json
   def show
     @account = Account.find(params[:id])
+    @chart_data = [["Time","Balance"]].concat(@account.transactions.map{|t| [t.created_at, t.balance.to_f.round(2)]}
 
     respond_to do |format|
       format.html # show.html.erba
