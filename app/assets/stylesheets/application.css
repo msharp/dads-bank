@@ -12,3 +12,13 @@
  *= require_self
  *= require_tree .
 */
+body {
+  background-image: url('/assets/bright_squares_bg.png')
+}
+#body.container {
+  background-color:white;
+  padding:1em;
+  border: #ddd solid;
+  border-width: 0 1px;
+}
+

@@ -5,11 +5,12 @@
   <%= @account.name %>
 </p>
 
-<div id="chart_div" style="width: 900px; height: 300px;"></div>
-
 <p><b>Balance:</b> <%= number_to_currency(@account.balance) %></p>
 <p><b>Allowance:</b> <%= number_to_currency(@account.allowance) %></p>
 <p><b>Interest rate:</b> <%= @account.bank.interest_readable %>
+
+
+<div id="chart_div" style="width: 100%; height: 300px;"></div>
 
 <table class="table table-striped" id="transactions">
   <thead>
@@ -32,36 +33,54 @@
   </tbody>
 </table>
 
+<!--
 <%= link_to 'Edit', edit_bank_account_path(@bank,@account) %> |
 <%= link_to 'Back', bank_accounts_path(@bank) %>
-
+-->
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
   /* https://developers.google.com/chart/interactive/docs/gallery/linechart */
   google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable(<%= @chart_data.to_json.html_safe %>);
-        var options = {
-          lineWidth: 6,
-          colors: ['green','blue'],
-          legend: {position: 'none'},
-          hAxis: {textPosition: 'none'},
-          vAxis: {format: '$#', textPosition: 'in'},
-          chartArea:{left:0,top:0,width:"100%",height:"100%"}
-        };
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable(<%= @chart_data.to_json.html_safe %>);
+    var options = {
+      lineWidth: 6,
+      colors: ['green','blue'],
+      legend: {position: 'none'},
+      hAxis: {textPosition: 'none'},
+      vAxis: {format: '$#', textPosition: 'in'},
+      chartArea:{left:0,top:0,width:"100%",height:"100%"}
+    };
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  };
+
+
+</script>
+<script type="text/javascript">
+
+  $.extend( $.fn.dataTableExt.oStdClasses, {
+    "sWrapper": "dataTables_wrapper form-inline"
+    });
+
+  $.extend( $.fn.dataTableExt.oStdClasses, {
+    "sSortAsc": "header headerSortDown",
+    "sSortDesc": "header headerSortUp",
+    "sSortable": "header"
+  });
 
   // datatables
   $(document).ready(function() {
-      $('#transactions').dataTable( {
-        "aoColumnDefs": [ 
-          { "bSortable": true, "aTargets": [ 0 ] },
-          { "bSortable": false, "aTargets": [1,2,3] }
-        ] } );
-      });
+    $('#transactions').dataTable({
+      "aoColumnDefs": [ 
+        { "bSortable": true, "aTargets": [ 0 ] },
+        { "bSortable": false, "aTargets": [1,2,3] }
+      ],
+      "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+      "sPaginationType": "bootstrap"
+    });
+  });
 
 </script>
