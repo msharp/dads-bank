@@ -1,8 +1,15 @@
 DadsBank::Application.routes.draw do
 
+  match 'login' => 'login#index', :as => :login
+  match 'logout' => 'login#logout', :as => :logout
+  match 'login/authenticate' => 'login#authenticate'
+
+  match 'account' => 'accounts#show'
+
   resources :bank do
     resources :accounts
   end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

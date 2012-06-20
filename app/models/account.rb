@@ -1,5 +1,5 @@
-require 'digest'
 class Account < ActiveRecord::Base
+  include Login
   attr_accessible :name, :hashed_password, :salt, :bank_id, :allowance
 
   belongs_to :bank
@@ -28,6 +28,13 @@ class Account < ActiveRecord::Base
 
   def debit(amount, description = nil)
     transact(amount,description){ balance - amount }
+  end
+
+  def self.authenticate(n,p)
+    if ( acc = Account.find_by_name(n) ) 
+      return acc if acc.hashed_password == Login.hash_password(p,acc.salt) 
+    end 
+    nil
   end
 
   private

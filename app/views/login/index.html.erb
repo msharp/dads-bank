@@ -1,0 +1,14 @@
+
+<%= form_tag("/login/authenticate", :method => 'post') do %> 
+
+  <%= label_tag :name %>
+  <%= text_field_tag :name %>
+
+  <%= label_tag :pass %>
+  <%= password_field_tag :pass %>
+
+  <div>
+    <%= submit_tag "Login", :class => "btn btn-primary " %>
+  </div>
+
+<% end %>

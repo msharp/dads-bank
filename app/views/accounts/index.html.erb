@@ -4,6 +4,7 @@
   <tr>
     <th>Bank</th>
     <th>Name</th>
+    <th>Allowance</th>
     <th>Balance</th>
     <th></th>
     <th></th>
@@ -14,6 +15,7 @@
   <tr>
     <td><%= account.bank.name %></td>
     <td><%= account.name %></td>
+    <td><%= number_to_currency(account.allowance) %></td>
     <td><%= number_to_currency(account.balance) %></td>
     <td><%= link_to 'Show', bank_account_path(@bank,account) %></td>
     <td><%= link_to 'Edit', edit_bank_account_path(@bank,account) %></td>
