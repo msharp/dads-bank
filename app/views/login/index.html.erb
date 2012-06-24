@@ -1,11 +1,13 @@
 
+<h2>Login</h2>
+
 <%= form_tag("/login/authenticate", :method => 'post') do %> 
 
   <%= label_tag :name %>
   <%= text_field_tag :name %>
 
-  <%= label_tag :pass %>
-  <%= password_field_tag :pass %>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
 
   <div>
     <%= submit_tag "Login", :class => "btn btn-primary " %>

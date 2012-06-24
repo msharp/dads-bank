@@ -10,13 +10,12 @@ class LoginController < ApplicationController
   end
 
   def authenticate
-    un = request[:name]
-    pw = request[:pass]
+    un,pw = request[:name],request[:password]
     if (acct = Account.authenticate(un,pw))
-      session[:account] = acct.id
-      redirect_to bank_account_path(acct.bank,acct) and return
-    elsif (bank = Bank.find_by_name(un))
-      session[:bank] = bank.id 
+      session[:account] = acct
+      redirect_to :account and return
+    elsif (bank = Bank.authenticate(un,pw))
+      session[:bank] = bank 
       redirect_to bank_accounts_path(bank) and return
     else
       flash[:error] = "Invalid login details"

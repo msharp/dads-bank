@@ -1,7 +1,5 @@
-
 require 'digest'
 module Login
-  attr_accessor :hashed_password, :salt
 
   def password=(pass)
     @password = pass

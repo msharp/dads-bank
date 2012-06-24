@@ -16,12 +16,16 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    acc = session[:account]
-    @account = Account.find(acc)
+    if (acc = session[:account])
+      @account = Account.find(acc)
+      @bank = Bank.find(@account.bank_id)
+    elsif @bank
+      @account = Account.find(params[:id])
+    else
+      flash[:alert] = "Invalid account details"
+      redirect_to :root and return
+    end
 
-    redirect_to :root if @account.nil?
-
-    @bank = Bank.find(@account.bank_id)
     @chart_data = [["Time","Balance"]].concat(
       @account.transactions.map{|t| [t.created_at, t.balance.to_f.round(2)] }
     )
@@ -102,7 +106,7 @@ class AccountsController < ApplicationController
   private
 
   def load_bank
-    @bank = Bank.find(params[:bank_id])
+    @bank = Bank.find(session[:bank])
   end
 
 end

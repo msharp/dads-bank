@@ -5,6 +5,7 @@ DadsBank::Application.routes.draw do
   match 'login/authenticate' => 'login#authenticate'
 
   match 'account' => 'accounts#show'
+  root :to => 'login#index'
 
   resources :bank do
     resources :accounts
