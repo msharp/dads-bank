@@ -1,7 +1,7 @@
 class Bank < ActiveRecord::Base
   include Login
-  attr_accessible :interest_period, :interest_rate, :name, :hashed_password, :salt
-  
+  attr_accessible :interest_period, :interest_rate, :name  
+
   validates :interest_period, :inclusion => {:in => %w{weekly monthly yearly}}
   validates :interest_rate, :numericality => true
   validates_presence_of :hashed_password, :salt, :name

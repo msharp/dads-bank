@@ -1,6 +1,11 @@
 require 'digest'
 module Login
 
+  def self.included(base)
+    base.send :attr_accessible, :password, :hashed_password, :salt
+    base.send :validates_presence_of, :hashed_password, :salt
+  end
+
   def password=(pass)
     @password = pass
     self.salt = Login.generate_salt unless self.salt?

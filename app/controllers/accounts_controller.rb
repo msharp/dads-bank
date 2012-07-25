@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
     if (acc = session[:account])
       @account = Account.find(acc)
       @bank = Bank.find(@account.bank_id)
-    elsif @bank
+    elsif load_bank
       @account = Account.find(params[:id])
     else
       flash[:alert] = "Invalid account details"
@@ -106,7 +106,12 @@ class AccountsController < ApplicationController
   private
 
   def load_bank
-    @bank = Bank.find(session[:bank])
+    if session[:bank].nil?
+      flash[:error] = "Not logged in."
+      redirect_to :login 
+    else
+      @bank = Bank.find(session[:bank])
+    end
   end
 
 end

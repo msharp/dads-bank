@@ -1,11 +1,11 @@
 class Account < ActiveRecord::Base
   include Login
-  attr_accessible :name, :hashed_password, :salt, :bank_id, :allowance
+  attr_accessible :name, :bank_id, :allowance
 
   belongs_to :bank
   has_many :transactions
 
-  validates_presence_of :bank_id, :hashed_password, :salt, :name
+  validates_presence_of :bank_id, :name
   
   def balance 
     self.transactions.size > 0 && self.transactions.last.balance || 0.0
