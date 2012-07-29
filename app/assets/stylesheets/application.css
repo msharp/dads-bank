@@ -20,5 +20,7 @@ body {
   padding:1em;
   border: #ddd solid;
   border-width: 0 1px;
+  width:960px
 }
+.money {color:green;}
 

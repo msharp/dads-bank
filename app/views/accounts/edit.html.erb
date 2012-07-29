@@ -1,6 +1,5 @@
-<h1>Editing account</h1>
+<div class="span10">
+  <h1><%= @bank.name %></h1>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', bank_account_path(@bank,@account) %> |
-<%= link_to 'Back', bank_accounts_path(@bank) %>
+<%= render 'form', :form_title => "Edit Account Details" %>

@@ -1,16 +1,19 @@
+<div class="span10">
+  <h2>Login</h2>
+</div>
 
-<h2>Login</h2>
+<div class="span10">
+  <%= form_tag("/login/authenticate", :method => 'post', :html => {:class => 'form-vertical'}) do %> 
 
-<%= form_tag("/login/authenticate", :method => 'post') do %> 
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
 
-  <%= label_tag :name %>
-  <%= text_field_tag :name %>
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
 
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
+    <div>
+      <%= submit_tag "Login", :class => "btn btn-primary " %>
+    </div>
 
-  <div>
-    <%= submit_tag "Login", :class => "btn btn-primary " %>
-  </div>
-
-<% end %>
+  <% end %>
+</div>

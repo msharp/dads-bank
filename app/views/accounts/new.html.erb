@@ -1,5 +1,5 @@
-<h1>New account</h1>
+<div class="span10">
+  <h1><%= @bank.name %></h1>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', bank_accounts_path(@bank) %>
+<%= render 'form', :form_title => "Create New Account" %>
